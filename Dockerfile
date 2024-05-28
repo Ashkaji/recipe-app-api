@@ -6,8 +6,8 @@ ENV PYTHONUNBUFFERED 1
 ARG DEV=false
 ENV DEV=${DEV}
 
-COPY ./requirements.txt /tmp/requirements.txt
-COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./requirements.txt ./tmp/requirements.txt
+COPY ./requirements.dev.txt ./tmp/requirements.dev.txt
 COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
