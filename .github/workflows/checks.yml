@@ -18,4 +18,3 @@ jobs:
         uses: ./build-and-test.yml
       - name: Lint
         run: docker-compose run --rm app flake8
-l
