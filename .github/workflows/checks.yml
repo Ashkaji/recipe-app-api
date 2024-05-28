@@ -6,15 +6,18 @@ on: [push]
 jobs:
   test-lint:
     name: Test and Lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: docker/login-action@v1
+      - uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Test (using Docker Compose)
         run: |
           docker-compose -f .github/workflows/build-and-test.yml up --build --exit-code-from app
+      - name: Capture Docker Compose Logs
+        if: failure()
+        run: docker-compose logs
       - name: Lint
         run: docker-compose run --rm app flake8
