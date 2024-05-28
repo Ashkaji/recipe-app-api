@@ -12,8 +12,8 @@ RUN python -m venv /py && \
   /py/bin/pip install --upgrade pip && \
   /py/bin/pip install -r /tmp/requirements.txt && \
   rm -rf /tmp && \
-  adduser --shell /bin/bash django-user  # Omit --disable-password
+  adduser -D -H django-user
 
-ENV PATH="py/bin:$PATH"
+ENV PATH="/py/bin:$PATH"
 
 USER django-user
